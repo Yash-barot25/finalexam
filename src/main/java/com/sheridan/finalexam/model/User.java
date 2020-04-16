@@ -4,16 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -57,19 +48,14 @@ public class  User implements UserDetails {
 	@Column(length = 50)
 	String  lastName;
 	
-	
-	@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable( 
-        name = "users_roles", 
-        joinColumns = @JoinColumn(referencedColumnName = "id", name = "user_id"), 
-        inverseJoinColumns = @JoinColumn(referencedColumnName = "id", name = "role_id"), 
-        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "role_id"})) 
-    private Collection<Role> roles;
+	@OneToOne
+	@JoinColumn(name = "role_id")
+	private Role role;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return getGrantedAuthorities(getPrivileges(roles));
+		return getGrantedAuthorities(getPrivileges(role));
 	}
 
 	@Override
@@ -80,11 +66,9 @@ public class  User implements UserDetails {
 
 	
 	
-	private List<String> getPrivileges(Collection<Role> roles) {
+	private List<String> getPrivileges(Role role) {
 		List<String> privileges = new ArrayList<>();
-		for (Role role : roles) {
-			privileges.add(role.getName().name());
-		}
+		privileges.add(role.getName().name());
 		return privileges;
 	}
 	

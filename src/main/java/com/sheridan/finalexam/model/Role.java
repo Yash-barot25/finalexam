@@ -32,8 +32,6 @@ public class Role {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "name", length = 20)
 	Roles name;
-	
-	@ManyToMany(mappedBy = "roles")
-    private Collection<User> employees;	
+
 
 }
