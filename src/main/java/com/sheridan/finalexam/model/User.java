@@ -22,10 +22,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity(name = "Users")
 public class  User implements UserDetails {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -51,6 +48,10 @@ public class  User implements UserDetails {
 	@OneToOne
 	@JoinColumn(name = "role_id")
 	private Role role;
+
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	private List<Booking> bookings;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

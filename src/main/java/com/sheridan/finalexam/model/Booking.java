@@ -21,6 +21,10 @@ public class Booking {
             inverseJoinColumns = @JoinColumn(name="roomtype_id"))
     private Set<RoomType> roomTypes;
 
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private User user;
+
     private int noOfAdult;
 
     private int noOfSeniorCitizen;
