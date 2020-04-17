@@ -39,43 +39,33 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Create your new account</h1>
                   </div>
-                  <form th:action="@{/register}" method="post" class="user">
+                  <form th:action="@{/register}" method="post" th:object="${user}" class="user">
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" name="firstName" id="firstName"  placeholder="Enter first name...">
+                      <input type="text" class="form-control form-control-user" th:field="*{firstName}"  placeholder="Enter first name...">
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" name="lastName" id="lastName"  placeholder="Enter Last name...">
+                      <input type="text" class="form-control form-control-user" th:field="*{lastName}"  placeholder="Enter Last name...">
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" name="username" id="username" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                      <input type="text" class="form-control form-control-user" th:field="*{email}" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" name="password" id="password" placeholder="Password">
+                      <input type="password" class="form-control form-control-user" th:field="*{password}" placeholder="Password">
                     </div>
-<!--                    <div class="form-group">-->
-<!--                      <div class="custom-control custom-radio custom-control-inline">-->
-<!--                        <input type="radio" id="#" name="" class="custom-control-input" value="1" th:field="*{}">-->
-<!--                        <label class="custom-control-label" for="##">CUSTOMER</label>-->
-<!--                      </div>-->
-<!--                      <div class="custom-control custom-radio custom-control-inline">-->
-<!--                        <input type="radio" id="#" name="" class="custom-control-input" value="2" th:field="*{}">-->
-<!--                        <label class="custom-control-label" for="##">STAFF</label>-->
-<!--                      </div>-->
-<!--                    </div>-->
+                   <div class="form-group">
+						<label>Select Type</label>
+						<select class="form-control" th:field="*{role}">
+						<option th:value="${role.id}" th:each="role,roleStat : ${roles}" th:text="${role.name}"></option>
+						</select>
+					</div>
 
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
-                      </div>
-                    </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">
-                      Login
+                      Register
                     </button>
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="/register">Create an Account!</a>
+                    <a class="small" href="/login">Already have an account? Click here</a>
                   </div>
                 </div>
               </div>

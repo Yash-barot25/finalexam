@@ -18,8 +18,21 @@ public class UserController {
 	UserRepository userRepository;
 	
 	@ResponseBody
-	@GetMapping("/get/users")
-	public List<User> getCustomers(){
+	@GetMapping("/rest-api/get/admins")
+	public List<User> getAdmins(){
 		return userRepository.findAllByRole_Name(Roles.ADMIN);
 	}
+	
+	@ResponseBody
+	@GetMapping("/rest-api/get/staffMembers")
+	public List<User> getStaffMembers(){
+		return userRepository.findAllByRole_Name(Roles.STAFF);
+	}
+	
+	@ResponseBody
+	@GetMapping("/rest-api/get/customers")
+	public List<User> getCustomers(){
+		return userRepository.findAllByRole_Name(Roles.CUSTOMER);
+	}
+	
 }

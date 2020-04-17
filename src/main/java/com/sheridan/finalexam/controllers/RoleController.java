@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sheridan.finalexam.model.Role;
 import com.sheridan.finalexam.repository.RoleRepository;
 
 @RestController
+@RequestMapping("/rest-api")
 public class RoleController {
 
 	@Autowired
