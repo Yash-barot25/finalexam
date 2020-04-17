@@ -52,13 +52,14 @@ public class BookingController {
 
 	@PostMapping("/make-booking")
 	public String persistBooking(@ModelAttribute Booking booking, Model model, RedirectAttributes redirectAttributes) {
-		if (booking.getId() == null) {
+		boolean isNewBooking = booking.getId() == null;
+		if (isNewBooking) {
 			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			booking.setUser(user);
 		}
 		bookingRepository.save(booking);
 		redirectAttributes.addFlashAttribute("booking", booking);
-		if (booking.getId() == null) {
+		if (isNewBooking) {
 			return "redirect:/booking-successful";
 		} else {
 			return "redirect:/list-bookings";
