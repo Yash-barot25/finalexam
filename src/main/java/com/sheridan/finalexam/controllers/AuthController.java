@@ -17,4 +17,9 @@ public class AuthController {
 		return "register";
 	}
 
+	@GetMapping("/booking")
+	public String bookingPage() {
+		return "/booking";
+	}
+
 }
