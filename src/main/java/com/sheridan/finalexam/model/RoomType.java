@@ -20,8 +20,4 @@ public class RoomType {
 
     private Double price;
 
-    @ManyToMany(mappedBy = "roomTypes")
-    Set<Booking> bookings;
-
-
 }

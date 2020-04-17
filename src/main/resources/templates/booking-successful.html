@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.thymeleaf.org/" layout:decorate="template">
+
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<body>
+	<div class="container-fluid" th:fragment="content">
+		<div class="card" th:object="${booking}">
+			<div class="card-header bg-success text-white">Booking Successful</div>
+			<div class="card-body">
+				<h5 class="card-title ">Your Booking Details:</h5>
+				<p class="card-text">Booking Id: [[*{id}]]</p>
+				<p class="card-text">Booked By: [[*{user.firstName}]] [[*{user.lastName}]]</p>
+				<p class="card-text">Room Type: [[*{roomType.type}]]</p>
+				<p class="card-text text-danger" th:if="*{user.role.name == T(com.sheridan.finalexam.enums.Roles).CUSTOMER && (noOfChildren != 0 || noOfSeniorCitizen != 0)}">Applied Discount: 30%</p>
+				<h5 class="card-title text-primary" th:if="*{user.role.name == T(com.sheridan.finalexam.enums.Roles).CUSTOMER}">Total Amount: $[[*{roomType.price - roomType.price*0.30}]]</h5>
+				<h5 class="card-title text-primary" th:if="*{user.role.name == T(com.sheridan.finalexam.enums.Roles).STAFF}">Total Amount: Free</h5>
+				<a href="/booking" class="btn btn-primary">Make Another Booking</a>
+			</div>
+		</div>
+		<h2 class="h3 col-12 m-4 text-center text-success">Thank You!</h2>
+	</div>
+</body>
+</html>

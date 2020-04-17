@@ -46,9 +46,4 @@ public class AuthController {
 		return "redirect:/login";
 	}
 
-	@GetMapping("/booking")
-	public String bookingPage() {
-		return "/booking";
-	}
-
 }

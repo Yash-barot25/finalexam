@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org/" layout:decorate="template">
+
+<head>
+
+  
+  <title>SB Admin 2 - Dashboard</title>
+
+  
+</head>
+
+<body id="page-top">
+
+		<!-- Begin Page Content -->
+        <div class="container-fluid" th:fragment="content">
+
+   		<!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Booking List</h1>
+            <a href="/add-user" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-users fa-sm text-white-50"></i> Add User</a>
+          </div>
+
+         
+         	 <!-- USER TABLE -->
+         <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">All Bookings</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+	                      <th>Room Type</th>
+	                      <th>Booked By</th>
+	                      <th>Email</th>
+	                      <th>Childrens</th>
+	                      <th>Adults</th>
+	                      <th>Senior Citizens</th>
+	                      <th>Customer Type</th>
+	                      <th>Amount</th>
+                    		<th>Action</th>	
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:object="${booking}" th:each ="booking : ${bookings}">
+                      <td th:text="*{roomType.type}"></td>
+                      <td th:text="*{user.firstName + ' ' + user.lastName}"></td>
+                      <td th:text="*{user.email}"></td>
+                      <td th:text="*{noOfChildren}"></td>
+                      <td th:text="*{noOfAdult}"></td>
+                      <td th:text="*{noOfSeniorCitizen}"></td>
+                      <td th:text="*{user.role.name}"></td>
+                      <td th:if="*{user.role.name == T(com.sheridan.finalexam.enums.Roles).CUSTOMER}" th:text="*{(noOfChildren != 0 || noOfSeniorCitizen != 0) ? roomType.price - roomType.price*0.30 : roomType.price}"></td>
+                      <td th:if="*{user.role.name == T(com.sheridan.finalexam.enums.Roles).STAFF}" th:text="Free"></td>
+                      <td class="text-center">
+                      	<a th:href="*{'/edit/booking/'+id}" class="btn btn-primary btn-circle mr-3">
+                   			 <i class="fa fa-pencil-alt"></i>
+                  		</a>
+                      
+                      	<a th:href="*{'/edit-booking/delete/'+id}" class="btn btn-danger btn-circle">
+                   			 <i class="fas fa-trash"></i>
+                  		</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          </div>
+          
+</body>
+
+</html>

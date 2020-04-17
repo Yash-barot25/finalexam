@@ -8,42 +8,43 @@
 <body>
 <div class="container-fluid" th:fragment="content">
 
-    <form class="user"  method="post">
+    <form class="user" th:action="@{/make-booking}" th:object="${booking}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{user}"/>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h1 class="m-0 font-weight-bold text-primary">Booking Form</h1>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-borderless" width="100%" cellspacing="0" >
 
                         <tr>
 
                             <td>Room Type:</td>
                             <td>
                                 <div >
-                                    <select>
-                                        <option >ROOM TYPE
-                                        </option>
-                                    </select>
+                                    <select class="form-control" th:field="*{roomType}">
+										<option th:value="${room.id}" th:each="room,roomStat : ${rooms}" th:text="${room.type+ ' - $' + room.price +' per night'}"></option>
+									</select>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td colspan="2">
                                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                     <h2 class="h3 mb-0 text-gray-800"
                                        >Member's Info</h2>
                                 </div>
                             </td>
-                            <td/>
+                            
                         </tr>
                         <tr>
                             <td>Children(s)</td>
                             <td>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" name="children"
-                                           id="###" placeholder="children's" >
+                                    <input type="number" class="form-control form-control-user" th:field="*{noOfChildren}"
+                                            placeholder="children's" >
                                 </div>
                             </td>
                         </tr>
@@ -51,7 +52,7 @@
                             <td>Adult(s)[18+]</td>
                             <td>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" name="adults"
+                                    <input type="number" class="form-control form-control-user" th:field="*{noOfAdult}"
                                            id="" placeholder="adults" >
                                 </div>
                             </td>
@@ -60,19 +61,20 @@
                             <td>Senior-Citizen(s)</td>
                             <td>
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" name="citizens"
+                                    <input type="number" class="form-control form-control-user" th:field="*{noOfSeniorCitizen}"
                                            id="" placeholder="senior-citizens" >
                                 </div>
                             </td>
                         </tr>
                     </table>
                 </div>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary btn-user btn-block"
-                >
+                <button type="submit" class="btn btn-primary btn-user btn-block">
             Book Room
         </button>
+            </div>
+            
+        </div>
+        
 
     </form>
 

@@ -16,10 +16,9 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany()
-    @JoinTable(name = "roomtype_booking", joinColumns = @JoinColumn(name = "booking_id"),
-            inverseJoinColumns = @JoinColumn(name="roomtype_id"))
-    private Set<RoomType> roomTypes;
+    @OneToOne
+	@JoinColumn(name = "room_type")
+    private RoomType roomType;
 
     @ManyToOne()
     @JoinColumn(name = "user_id")
