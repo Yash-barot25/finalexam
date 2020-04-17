@@ -30,7 +30,7 @@ public class  User implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
+	Long id;
 	
 	@NotNull
 	@Column(length = 255)
